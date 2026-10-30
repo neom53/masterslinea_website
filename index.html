@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
 <script>
   /* Set before first paint so animated elements start in their pre-animation state instead of flashing. */
+  document.documentElement.classList.add('js');
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-anim');
 </script>
 <style>
@@ -91,6 +92,35 @@ nav.top.nav-hidden { transform: translateY(-100%); }
 @keyframes slide { to { transform: translateX(-50%); } }
 
 /* ───────── testimonials ───────── */
+/* ───────── case study: Mike Chang, Flow60 ───────── */
+.case { background: var(--bg); padding: 110px 60px 30px; }
+.case-row { display: flex; justify-content: center; align-items: center; gap: 72px; }
+.case-panel { width: 100%; max-width: 440px; }
+.case-title { font-family: var(--serif); font-weight: 300; font-size: clamp(38px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.01em; color: var(--ink); margin: 0 0 26px; }
+.case-who { display: flex; flex-direction: column; gap: 8px; margin: 0 0 30px; }
+.case-name { font-size: 17px; font-weight: 400; letter-spacing: .3px; color: var(--ink); }
+.case-role { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+.case-phases { list-style: none; margin: 0 0 36px; padding: 0; border-top: 1px solid var(--rule); }
+.case-line { font-family: var(--serif); font-weight: 300; font-style: italic; font-size: clamp(22px, 2vw, 28px); line-height: 1.3; color: var(--ink); margin: 0 0 30px; }
+.case-phases li { padding: 18px 0 20px; border-bottom: 1px solid var(--rule); }
+.case-phases .case-phase-t { margin: 0; }
+.case-phase-n { display: block; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 8px; }
+.case-phase-t { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.15; color: var(--ink); margin: 0 0 10px; }
+.case-phases p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ink); }
+.case-open { cursor: pointer; }
+.case-open[hidden] { display: none; }
+.case-full { display: grid; grid-template-rows: 1fr; }
+html.js .case-full { grid-template-rows: 0fr; transition: grid-template-rows 1s var(--ease); }
+html.js .case-full.open { grid-template-rows: 1fr; }
+.case-full-inner { overflow: hidden; min-height: 0; }
+.case-body { max-width: 760px; margin: 0 auto; padding: 80px 0 40px; }
+.case-body h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px, 3vw, 40px); line-height: 1.1; color: var(--ink); margin: 52px 0 16px; }
+.case-body h3:first-child { margin-top: 0; }
+.case-body p { font-size: 17px; line-height: 1.75; color: var(--ink); margin: 0 0 16px; }
+.case-body strong { font-weight: 500; }
+html.js-anim .case-full .case-body { opacity: 0; translate: 0 24px; transition: opacity .9s ease .2s, translate 1.1s var(--ease) .2s; }
+html.js-anim .case-full.open .case-body { opacity: 1; translate: 0 0; }
+
 .voices { background: var(--bg); padding: 110px 60px 30px; }
 .voices-row { display: flex; justify-content: center; align-items: flex-start; gap: 48px; }
 .tm-video-wrap { position: relative; height: min(74vh, 760px, calc((100vw - 168px) / 2 * 16 / 9)); aspect-ratio: 9 / 16; overflow: hidden; background: var(--dark); box-shadow: 0 20px 60px rgba(0,0,0,0.18); line-height: 0; cursor: pointer; }
@@ -221,6 +251,11 @@ html.js-anim .rise.is-in { opacity: 1; translate: 0 0; }
   .hero-title { font-size: 38px; letter-spacing: -0.5px; line-height: 1.05; }
   .hero-sub { font-size: 16px; max-width: 100%; margin-top: 18px; }
   .vsl-inner { padding: 56px 16px; gap: 24px; }
+  .case { padding: 64px 16px 16px; }
+  .case-row { flex-direction: column; gap: 40px; }
+  .case-panel { max-width: 100%; }
+  .case-body { padding: 48px 0 24px; }
+  .case-body p { font-size: 16px; }
   .voices { padding: 64px 16px 16px; }
   .voices-row { flex-direction: column; align-items: center; gap: 32px; }
   .tm-video-wrap { height: auto; width: 82%; max-width: 340px; }
@@ -310,6 +345,49 @@ html.js-anim .rise.is-in { opacity: 1; translate: 0 0; }
   </section>
 
   <!-- ═══════ TESTIMONIALS ═══════ -->
+  <!-- ═══════ CASE STUDY: Mike Chang, Flow60. The video link is set in build.py (MIKE_LINK) ═══════ -->
+  <section class="case" id="case">
+    <div class="case-row">
+      <div class="tm-video-wrap clip reveal" data-video>
+        <video playsinline preload="metadata"><source src="https://www.dropbox.com/scl/fi/mtiidsw7tk0gb8fad8z01/MIKE-TESTIMONIAL.mp4?rlkey=280pcl5is0pzacxjlraa282uz&amp;st=31upwe4x&amp;raw=1" type="video/mp4"></video>
+        <button class="play-btn" aria-label="Play Mike Chang's testimonial"><svg viewBox="0 0 80 80" width="80" height="80" aria-hidden="true"><circle cx="40" cy="40" r="39" fill="rgba(14,12,10,0.55)" stroke="#f5f2ec" stroke-width="1.5"/><polygon points="32,26 32,54 56,40" fill="#f5f2ec"/></svg></button>
+      </div>
+      <div class="case-panel rise reveal">
+        <h2 class="case-title">Mike's story</h2>
+        <p class="case-who"><span class="case-name">Mike Chang</span><span class="case-role">Flow60, owner and founder</span></p>
+        <p class="case-line">5 years sampling with no real progress.</p>
+        <ol class="case-phases">
+          <li>
+            <span class="case-phase-n">Phase 1</span>
+            <h3 class="case-phase-t">Design and sampling</h3>
+          </li>
+          <li>
+            <span class="case-phase-n">Phase 2</span>
+            <h3 class="case-phase-t">Production and launch</h3>
+          </li>
+        </ol>
+        <button type="button" class="btn-primary case-open" id="caseOpen" aria-expanded="false" aria-controls="caseFull"><span class="bt">Click to see full case study</span></button>
+      </div>
+    </div>
+    <div class="case-full" id="caseFull">
+      <div class="case-full-inner">
+        <article class="case-body">
+          <h3>The challenge</h3>
+          <p>Mike had been trying to make clothes for eight years. He had multiple boxes of samples, but nothing seemed to fit. As a business owner working long hours every day, he didn't have the time to sit down and design, or to do the work that goes into making a clothing brand.</p>
+          <h3>Our approach</h3>
+          <p>We took that load off his shoulders so he could stay focused on running his businesses. We began with a two-hour session at his house, where Mike showed us his favourite pieces of clothing, what he wanted to take into the brand, and his ideas. That gave our team enough to start drafting mood boards, designs, colourways and the branding. From there, we took care of the design, the sampling and all the factory communication.</p>
+          <h3>What we delivered</h3>
+          <p><strong>Branding.</strong> The Flow60 branding already existed. We tested logo placement, logo colouring, embroidery and jacquard, and the logo was finished in embroidery.</p>
+          <p><strong>Fabric.</strong> Mike wanted the fabric to be organic. We chose 100% organic bamboo viscose, which has the same qualities as cotton but is more durable and tougher. The trousers are a heavyweight 250 GSM for a clean drape.</p>
+          <p><strong>Comfort.</strong> The waistband has no elastication, a key requirement for Mike: absolutely zero restriction in blood flow.</p>
+          <p><strong>The collection.</strong> Trousers, shorts, t-shirts and a jacket, all designed and sampled as one collection.</p>
+          <h3>The result</h3>
+          <p>A complete collection that Mike now wears as his own branded merchandise for interviews, events and his videos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="voices" id="voices">
     <div class="voices-row">
       <div class="tm-video-wrap clip reveal" data-video>
@@ -529,6 +607,16 @@ html.js-anim .rise.is-in { opacity: 1; translate: 0 0; }
   function vslFail() { document.getElementById('vslFrame').classList.add('vsl-failed'); vs.classList.add('hidden'); }
   vv.addEventListener('error', vslFail);
   if (vv.error) vslFail();
+
+  /* ── case study: the full write-up opens in place ── */
+  var caseOpen = document.getElementById('caseOpen'), caseFull = document.getElementById('caseFull');
+  caseFull.inert = true;
+  caseOpen.addEventListener('click', function () {
+    caseFull.inert = false;
+    caseFull.classList.add('open');
+    caseOpen.setAttribute('aria-expanded', 'true');
+    caseOpen.hidden = true;
+  });
 
   /* ── testimonials: click to play, pause when scrolled away ── */
   document.querySelectorAll('[data-video]').forEach(function (w) {
